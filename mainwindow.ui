@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>735</width>
+    <height>376</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Simple复现上位机</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/image/seu.png</normaloff>:/image/seu.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="mainLayout">
+      <item row="0" column="0">
+       <widget class="QGroupBox" name="serialSettingsGroupBox">
+        <property name="title">
+         <string>串口设置</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="serialSettingsLayout">
+           <item row="0" column="1">
+            <widget class="QComboBox" name="portNameComboBox"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="portNameLabel">
+             <property name="text">
+              <string>串口号:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="bandRateComboBox"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="bandRateLabel">
+             <property name="text">
+              <string>波特率:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="connectSerialButton">
+             <property name="text">
+              <string>打开串口</string>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/image/connect.png</normaloff>:/image/connect.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="disconnectSerialButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>关闭串口</string>
+             </property>
+             <property name="icon">
+              <iconset resource="res.qrc">
+               <normaloff>:/image/disconnect.png</normaloff>:/image/disconnect.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QGroupBox" name="sysSettingsGroupBox">
+        <property name="title">
+         <string>系统设置</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="sysSettingsLayout">
+           <item row="2" column="1">
+            <widget class="QLabel" name="manualNumLabel">
+             <property name="text">
+              <string>人工路径共0个点</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="autorunNumLabel">
+             <property name="text">
+              <string>自动路径共0个点</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="initNumLabel">
+             <property name="text">
+              <string>初始路径共0个点</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="choosManualPathButton">
+             <property name="text">
+              <string>选择人工路径</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="chooseAutorunPathButton">
+             <property name="text">
+              <string>选择自动路径</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="continuousTxInitButton">
+             <property name="text">
+              <string>连续发送初始</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QPushButton" name="continuousTxAutorunButton">
+             <property name="text">
+              <string>连续发送自动</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QPushButton" name="continuousTxManualButton">
+             <property name="text">
+              <string>连续发送人工</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="chooseInitPathButton">
+             <property name="text">
+              <string>选择初始路径</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="intervalTimeLabel">
+             <property name="text">
+              <string>发送间隔:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="intervalTimeComboBox"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="msLabel">
+             <property name="text">
+              <string>ms</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="2" rowspan="2">
+       <widget class="QGroupBox" name="serialRxTxGroupBox">
+        <property name="title">
+         <string>串口收发</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="serialRxTxLayout">
+           <item row="2" column="0">
+            <widget class="QLabel" name="txLabel">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>发送消息:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="clearRxTxButton">
+             <property name="text">
+              <string>清除收发</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="rxLabel">
+             <property name="text">
+              <string>接受消息:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="singleTxButton">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>单次发送</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" rowspan="2">
+            <widget class="QTextEdit" name="rxTextEdit">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" rowspan="2">
+            <widget class="QLineEdit" name="txLineEdit"/>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
