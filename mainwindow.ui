@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>735</width>
-    <height>376</height>
+    <width>1092</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -87,62 +87,7 @@
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="0" column="0">
           <layout class="QGridLayout" name="sysSettingsLayout">
-           <item row="2" column="1">
-            <widget class="QLabel" name="manualNumLabel">
-             <property name="text">
-              <string>人工路径共0个点</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLabel" name="autorunNumLabel">
-             <property name="text">
-              <string>自动路径共0个点</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLabel" name="initNumLabel">
-             <property name="text">
-              <string>初始路径共0个点</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="choosManualPathButton">
-             <property name="text">
-              <string>选择人工路径</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QPushButton" name="chooseAutorunPathButton">
-             <property name="text">
-              <string>选择自动路径</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QPushButton" name="continuousTxInitButton">
-             <property name="text">
-              <string>连续发送初始</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="2">
-            <widget class="QPushButton" name="continuousTxAutorunButton">
-             <property name="text">
-              <string>连续发送自动</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
             <widget class="QPushButton" name="continuousTxManualButton">
              <property name="text">
               <string>连续发送人工</string>
@@ -159,15 +104,15 @@
              </property>
             </widget>
            </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="intervalTimeComboBox"/>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="intervalTimeLabel">
              <property name="text">
               <string>发送间隔:</string>
              </property>
             </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="intervalTimeComboBox"/>
            </item>
            <item row="0" column="2">
             <widget class="QLabel" name="msLabel">
@@ -176,12 +121,88 @@
              </property>
             </widget>
            </item>
+           <item row="5" column="0">
+            <widget class="QPushButton" name="resetInitButton">
+             <property name="text">
+              <string>复位初始</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="initNumLabel">
+             <property name="text">
+              <string>初始路径共0个点</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="continuousTxInitButton">
+             <property name="text">
+              <string>连续发送初始</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="chooseAutorunPathButton">
+             <property name="text">
+              <string>选择自动路径</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="choosManualPathButton">
+             <property name="text">
+              <string>选择人工路径</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="autorunNumLabel">
+             <property name="text">
+              <string>自动路径共0个点</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="manualNumLabel">
+             <property name="text">
+              <string>人工路径共0个点</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="continuousTxAutorunButton">
+             <property name="text">
+              <string>连续发送自动</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="resetAutorunButton">
+             <property name="text">
+              <string>复位自动</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QPushButton" name="resetManualButton">
+             <property name="text">
+              <string>复位人工</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
         </layout>
        </widget>
       </item>
-      <item row="0" column="2" rowspan="2">
+      <item row="0" column="1" rowspan="2" colspan="2">
        <widget class="QGroupBox" name="serialRxTxGroupBox">
         <property name="title">
          <string>串口收发</string>
@@ -202,21 +223,14 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="4" column="3">
             <widget class="QPushButton" name="clearRxTxButton">
              <property name="text">
               <string>清除收发</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="rxLabel">
-             <property name="text">
-              <string>接受消息:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
+           <item row="4" column="2">
             <widget class="QPushButton" name="singleTxButton">
              <property name="maximumSize">
               <size>
@@ -229,14 +243,31 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1" rowspan="2">
+           <item row="0" column="0" rowspan="2">
+            <widget class="QLabel" name="rxLabel">
+             <property name="text">
+              <string>接受消息:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QCheckBox" name="isShowTimeCheckBox">
+             <property name="text">
+              <string>时间戳</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" rowspan="2" colspan="3">
             <widget class="QTextEdit" name="rxTextEdit">
              <property name="readOnly">
               <bool>true</bool>
              </property>
             </widget>
            </item>
-           <item row="2" column="1" rowspan="2">
+           <item row="2" column="1" colspan="3">
             <widget class="QLineEdit" name="txLineEdit"/>
            </item>
           </layout>

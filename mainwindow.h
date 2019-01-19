@@ -40,8 +40,11 @@ private:
 
     QDir currentPath;
 
+    bool isShowTimeFlag;
+
 
 private slots:
+
     void on_portNameComboBox_activated(int index);
 
     void on_bandRateComboBox_activated(int index);
@@ -69,6 +72,14 @@ private slots:
     void on_singleTxButton_clicked();
 
     void on_serialPort_readyRead();
+
+    void on_resetInitButton_clicked();
+
+    void on_resetAutorunButton_clicked();
+
+    void on_resetManualButton_clicked();
+
+    void on_isShowTimeCheckBox_stateChanged(int arg1);
 
 protected:
     void timerEvent(QTimerEvent *event);

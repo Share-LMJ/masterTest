@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     isSendInit = false;
     isSendAutorun = false;
     isSendManual = false;
+    isShowTimeFlag = true;
 
     connect(&serialPort,SIGNAL(readyRead()),this,SLOT(on_serialPort_readyRead()));
 
@@ -157,7 +158,34 @@ void MainWindow::on_chooseInitPathButton_clicked()
 
 void MainWindow::on_choosManualPathButton_clicked()
 {
+    QString filePath = QFileDialog::getOpenFileName(this,QString::fromLocal8Bit("选择文件"),currentPath.path(),tr("* txt"));
+    if(filePath.isEmpty())
+    {
+        return;
+    }
 
+    sendManualData.clear();
+    QFile file(filePath);
+    QString line;
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        //没到底就一直读
+        while(!file.atEnd())
+        {
+            line = QString(file.readLine());
+            int nIndexJ = line.indexOf('J');
+            if(nIndexJ != -1)
+            {
+                line.remove("\r");
+                line.remove("\n");
+                line.remove(0,nIndexJ);
+                sendManualData.append(line);
+            }
+
+        }
+        nSizeManual = sendManualData.size();
+        ui->manualNumLabel->setText(QString::fromLocal8Bit("人工路径共%1个点").arg(nSizeManual));
+    }
 }
 
 void MainWindow::on_chooseAutorunPathButton_clicked()
@@ -235,7 +263,29 @@ void MainWindow::on_continuousTxManualButton_toggled(bool checked)
     if(serialPort.isOpen() == false)
     {
         ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("请先打开串口!"),1000);
+        ui->continuousTxManualButton->setChecked(false);
         return;
+    }
+
+    //判断是否有足够的点
+    if(nSizeManual == 0 )
+    {
+        ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("没有足够的点!"),1000);
+        ui->continuousTxManualButton->setChecked(false);
+        return ;
+    }
+
+    //按下
+    if(checked == true)
+    {
+        nTimerIDManual = startTimer(ui->intervalTimeComboBox->currentData().toInt());
+        isSendManual= true;
+    }
+    //松开
+    else
+    {
+        killTimer(nTimerIDManual);
+        isSendManual = false;
     }
 }
 
@@ -297,6 +347,9 @@ void MainWindow::on_serialPort_readyRead()
     QTextCursor textCursor = ui->rxTextEdit->textCursor();
     textCursor.movePosition(QTextCursor::End);
     ui->rxTextEdit->setTextCursor(textCursor);
+
+    QString readData = QString(serialPort.readAll());
+    isShowTimeFlag ? readData = readData.replace("\r\n",GetCurrentTime() + " - \r\n") : readData;
 
     ui->rxTextEdit->insertPlainText(QString(serialPort.readAll()));
 }
@@ -366,4 +419,58 @@ void MainWindow::timerEvent(QTimerEvent *event)
             }
         }
     }
+
+    //判断是不是人工
+    if(event->timerId() == nTimerIDManual && isSendManual == true)
+    {
+        //有就发送
+        if(nIndexManual < nSizeManual)
+        {
+            //发送数据
+            ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("当前发送第%1个").arg(nIndexManual),1000);
+
+            serialPort.write(sendManualData.at(nIndexManual).toLatin1().append("\r\n"));
+
+            //如果是最后一个
+            if(nIndexManual == nSizeManual-1)
+            {
+                //复位清零
+                nIndexManual = 0;
+                ui->txLineEdit->clear();
+
+                emit ui->continuousTxManualButton->toggled(false);
+                ui->continuousTxManualButton->setChecked(false);
+            }
+            //不是最后一个就把下一个坐标放在文本上
+            else
+            {
+                nIndexManual ++;
+                ui->txLineEdit->setText(sendManualData.at(nIndexManual));
+            }
+        }
+    }
+
+}
+
+void MainWindow::on_resetInitButton_clicked()
+{
+    nIndexInit = 0;
+    ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("初始路径复位成功"),1000);
+}
+
+void MainWindow::on_resetAutorunButton_clicked()
+{
+    nIndexAutorun = 0;
+    ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("自动路径复位成功"),1000);
+}
+
+void MainWindow::on_resetManualButton_clicked()
+{
+    nIndexManual = 0;
+    ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("人工路径复位成功"),1000);
+}
+
+void MainWindow::on_isShowTimeCheckBox_stateChanged(int arg1)
+{
+    (arg1 == 0) ? isShowTimeFlag = false : isShowTimeFlag = true;
 }
