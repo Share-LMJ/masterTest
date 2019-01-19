@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
-    <normaloff>:/image/seu.png</normaloff>:/image/seu.png</iconset>
+    <normaloff>:/image/serial.png</normaloff>:/image/serial.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -29,23 +29,13 @@
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
           <layout class="QGridLayout" name="serialSettingsLayout">
-           <item row="0" column="1">
+           <item row="0" column="2">
             <widget class="QComboBox" name="portNameComboBox"/>
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="portNameLabel">
              <property name="text">
               <string>串口号:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="bandRateComboBox"/>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="bandRateLabel">
-             <property name="text">
-              <string>波特率:</string>
              </property>
             </widget>
            </item>
@@ -60,7 +50,17 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="1" column="2">
+            <widget class="QComboBox" name="bandRateComboBox"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="bandRateLabel">
+             <property name="text">
+              <string>波特率:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
             <widget class="QPushButton" name="disconnectSerialButton">
              <property name="enabled">
               <bool>false</bool>
@@ -71,6 +71,26 @@
              <property name="icon">
               <iconset resource="res.qrc">
                <normaloff>:/image/disconnect.png</normaloff>:/image/disconnect.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QPushButton" name="refreshSerialButton">
+             <property name="text">
+              <string>刷新串口</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="serialImageLabel">
+             <property name="text">
+              <string>串口仿真助手</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::AutoText</enum>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>

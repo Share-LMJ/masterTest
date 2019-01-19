@@ -45,10 +45,6 @@ private:
 
 private slots:
 
-    void on_portNameComboBox_activated(int index);
-
-    void on_bandRateComboBox_activated(int index);
-
     void on_connectSerialButton_clicked();
 
     void on_disconnectSerialButton_clicked();
@@ -80,6 +76,8 @@ private slots:
     void on_resetManualButton_clicked();
 
     void on_isShowTimeCheckBox_stateChanged(int arg1);
+
+    void on_refreshSerialButton_clicked();
 
 protected:
     void timerEvent(QTimerEvent *event);

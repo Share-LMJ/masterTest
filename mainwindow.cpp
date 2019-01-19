@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //刷新串口
-    on_portNameComboBox_activated(0);
+    on_refreshSerialButton_clicked();
 
     //增加波特率
     ui->bandRateComboBox->clear();
@@ -49,32 +49,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_portNameComboBox_activated(int index)
-{
-    //清除原有内容
-    ui->portNameComboBox->clear();
-
-    //添加现有串口
-    const auto infos = QSerialPortInfo::availablePorts();
-    //如果是空的就退出
-    if(infos.isEmpty())
-    {
-        ui->portNameComboBox->addItem("None");
-        return;
-    }
-
-    //非空就添加串口
-    for(const QSerialPortInfo &info: infos)
-    {
-        ui->portNameComboBox->addItem(info.portName());
-    }
-}
-
-void MainWindow::on_bandRateComboBox_activated(int index)
-{
-
-}
-
 void MainWindow::on_connectSerialButton_clicked()
 {
     //设置串口
@@ -92,6 +66,7 @@ void MainWindow::on_connectSerialButton_clicked()
         ui->disconnectSerialButton->setEnabled(true);
         ui->intervalTimeComboBox->setDisabled(true);
         ui->connectSerialButton->setDisabled(true);
+        ui->refreshSerialButton->setDisabled(true);
         ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("串口打开成功!"),1000);
     }
     else
@@ -117,9 +92,31 @@ void MainWindow::on_disconnectSerialButton_clicked()
     ui->connectSerialButton->setEnabled(true);
     ui->disconnectSerialButton->setDisabled(true);
     ui->intervalTimeComboBox->setEnabled(true);
+    ui->refreshSerialButton->setEnabled(true);
     ui->statusBar->showMessage(GetCurrentTime() + " - " + QString::fromLocal8Bit("串口打开成功!"),1000);
 
 
+}
+
+void MainWindow::on_refreshSerialButton_clicked()
+{
+    //清除原有内容
+    ui->portNameComboBox->clear();
+
+    //添加现有串口
+    const auto infos = QSerialPortInfo::availablePorts();
+    //如果是空的就退出
+    if(infos.isEmpty())
+    {
+        ui->portNameComboBox->addItem("None");
+        return;
+    }
+
+    //非空就添加串口
+    for(const QSerialPortInfo &info: infos)
+    {
+        ui->portNameComboBox->addItem(info.portName());
+    }
 }
 
 void MainWindow::on_chooseInitPathButton_clicked()
@@ -474,3 +471,5 @@ void MainWindow::on_isShowTimeCheckBox_stateChanged(int arg1)
 {
     (arg1 == 0) ? isShowTimeFlag = false : isShowTimeFlag = true;
 }
+
+
